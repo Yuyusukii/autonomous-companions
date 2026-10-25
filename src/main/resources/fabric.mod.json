@@ -1,0 +1,27 @@
+{
+	"schemaVersion": 1,
+	"id": "autonomouscompanions",
+	"version": "${version}",
+	"name": "Autonomous Companions",
+	"description": "Três companheiras autônomas que acompanham o jogador, coletam recursos reais, fabricam ferramentas, sobrevivem, combatem e constroem casas.",
+	"authors": [
+		"Autonomous Companions"
+	],
+	"license": "MIT",
+	"icon": "assets/autonomouscompanions/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"dev.autonomouscompanions.AutonomousCompanions"
+		],
+		"client": [
+			"dev.autonomouscompanions.client.AutonomousCompanionsClient"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.19.5",
+		"minecraft": "~26.3",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}

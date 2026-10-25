@@ -1,0 +1,24 @@
+{
+  "nome": "Minerar ferro",
+  "objetivo": "Obter ferro suficiente para fabricar os equipamentos pedidos (barras de ferro).",
+  "palavras_chave": ["minerar ferro", "ferro", "minério de ferro", "barra de ferro", "barras de ferro"],
+  "quantidade_padrao": 3,
+  "pre_requisitos": [
+    {"tipo": "ferramenta_para", "bloco": "minecraft:iron_ore", "descricao": "Picareta apropriada (de pedra ou melhor)."},
+    {"tipo": "espaco_livre", "minimo": 2, "descricao": "Espaço livre no inventário."},
+    {"tipo": "seguranca", "descricao": "Sem monstros por perto antes de descer."}
+  ],
+  "procedimento": [
+    {"acao": "avaliar", "descricao": "Avaliar inventário, vida e equipamento."},
+    {"acao": "obter", "item": "minecraft:raw_iron", "quantidade": "$quantidade", "descricao": "Procurar minério de ferro (descendo e abrindo galerias se preciso), confirmar a ferramenta e minerar a quantidade planejada."},
+    {"acao": "fundir", "item": "minecraft:iron_ingot", "quantidade": "$quantidade", "descricao": "Processar o ferro bruto na fornalha (com combustível)."},
+    {"acao": "verificar", "item": "minecraft:iron_ingot", "quantidade": "$quantidade", "descricao": "Recolher os itens e verificar o inventário."}
+  ],
+  "recuperacao": [
+    {"falha": "INVENTARIO_CHEIO", "acao": "liberar_espaco", "descricao": "Inventário cheio: descartar itens permitidos."},
+    {"falha": "SEM_ROTA", "acao": "tentar_de_novo", "descricao": "Rota bloqueada: procurar uma alternativa."},
+    {"falha": "NAO_ENCONTRADO", "acao": "ampliar_busca", "descricao": "Nada por perto: procurar mais longe."},
+    {"falha": "PERIGO", "acao": "aguardar_seguranca", "descricao": "Perigo elevado: recuar ou combater conforme os recursos e voltar depois."}
+  ],
+  "sucesso": {"item": "minecraft:iron_ingot", "minimo": "$quantidade", "descricao": "Quantidade pedida de barras de ferro no inventário."}
+}

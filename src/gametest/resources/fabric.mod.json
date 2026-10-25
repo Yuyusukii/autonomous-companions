@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "autonomouscompanions-test",
+  "version": "1.0.0",
+  "name": "Autonomous Companions - Testes",
+  "description": "Testes de jogo (servidor GameTest e cliente) do mod Autonomous Companions.",
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["dev.autonomouscompanions.test.TestModInit"],
+    "fabric-gametest": [
+      "dev.autonomouscompanions.test.IdentityGameTests",
+      "dev.autonomouscompanions.test.MissionGameTests",
+      "dev.autonomouscompanions.test.SurvivalGameTests",
+      "dev.autonomouscompanions.test.BuildAndRoleGameTests",
+      "dev.autonomouscompanions.test.StabilityGameTests",
+      "dev.autonomouscompanions.test.AssistGameTests",
+      "dev.autonomouscompanions.test.HelperAndCombatGameTests",
+      "dev.autonomouscompanions.test.SpeedGameTests",
+      "dev.autonomouscompanions.test.DemonGameTests",
+      "dev.autonomouscompanions.test.YunoGameTests",
+      "dev.autonomouscompanions.test.TerrainGameTests",
+      "dev.autonomouscompanions.test.FieldReportGameTests",
+      "dev.autonomouscompanions.test.RealWorldGameTests",
+      "dev.autonomouscompanions.test.CombatIntelligenceGameTests",
+      "dev.autonomouscompanions.test.MissionLifecycleGameTests",
+      "dev.autonomouscompanions.test.MeatOrderGameTests",
+      "dev.autonomouscompanions.test.NavigationSafetyGameTests",
+      "dev.autonomouscompanions.test.SustainedModeGameTests",
+      "dev.autonomouscompanions.test.MindGameTests",
+      "dev.autonomouscompanions.test.CatalogGameTests",
+      "dev.autonomouscompanions.test.SkillGameTests",
+      "dev.autonomouscompanions.test.TalkGameTests"
+    ],
+    "fabric-client-gametest": ["dev.autonomouscompanions.test.CompanionsClientGameTest"]
+  },
+  "depends": {
+    "autonomouscompanions": "*",
+    "fabric-api": "*"
+  }
+}

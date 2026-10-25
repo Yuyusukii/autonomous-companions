@@ -1,0 +1,21 @@
+{
+  "nome": "Fabricar picareta de pedra",
+  "objetivo": "Sair do zero até uma picareta de pedra: madeira, bancada, gravetos, picareta de madeira, pedregulho e a picareta de pedra.",
+  "palavras_chave": ["picareta de pedra", "fabricar picareta", "fazer picareta", "ferramenta de pedra"],
+  "quantidade_padrao": 1,
+  "pre_requisitos": [
+    {"tipo": "espaco_livre", "minimo": 3, "descricao": "Espaço para madeira, gravetos e pedregulho."}
+  ],
+  "procedimento": [
+    {"acao": "avaliar", "descricao": "Avaliar o que já tem (madeira, pedregulho, bancada por perto)."},
+    {"acao": "obter", "item": "minecraft:cobblestone", "quantidade": "3", "descricao": "Conseguir 3 pedregulhos (fazendo antes uma picareta de madeira, se não tiver)."},
+    {"acao": "fabricar", "item": "minecraft:stone_pickaxe", "quantidade": "$quantidade", "descricao": "Fabricar a picareta de pedra na bancada (colocando uma bancada se não houver)."},
+    {"acao": "verificar", "item": "minecraft:stone_pickaxe", "quantidade": "$quantidade", "descricao": "Conferir a picareta."}
+  ],
+  "recuperacao": [
+    {"falha": "NAO_ENCONTRADO", "acao": "ampliar_busca", "descricao": "Sem árvores ou pedra por perto: procurar mais longe."},
+    {"falha": "SEM_ROTA", "acao": "tentar_de_novo", "descricao": "Caminho bloqueado: tentar outro lugar."},
+    {"falha": "INVENTARIO_CHEIO", "acao": "liberar_espaco", "descricao": "Inventário cheio: descartar itens permitidos."}
+  ],
+  "sucesso": {"item": "minecraft:stone_pickaxe", "minimo": "$quantidade", "descricao": "Picareta de pedra no inventário."}
+}

@@ -1,0 +1,18 @@
+{
+  "nome": "Fazer tábuas",
+  "objetivo": "Transformar troncos em tábuas (cortando árvores se faltar tronco).",
+  "palavras_chave": ["fazer tábuas", "tábuas", "tábua", "madeira trabalhada"],
+  "quantidade_padrao": 16,
+  "pre_requisitos": [
+    {"tipo": "espaco_livre", "minimo": 1, "descricao": "Espaço livre no inventário."}
+  ],
+  "procedimento": [
+    {"acao": "fabricar", "item": "#minecraft:planks", "quantidade": "$quantidade", "descricao": "Fabricar tábuas no inventário (1 tronco dá 4 tábuas), cortando troncos antes se faltarem."},
+    {"acao": "verificar", "item": "#minecraft:planks", "quantidade": "$quantidade", "descricao": "Conferir as tábuas."}
+  ],
+  "recuperacao": [
+    {"falha": "NAO_ENCONTRADO", "acao": "ampliar_busca", "descricao": "Sem árvores por perto: procurar mais longe."},
+    {"falha": "INVENTARIO_CHEIO", "acao": "liberar_espaco", "descricao": "Inventário cheio: descartar itens permitidos."}
+  ],
+  "sucesso": {"item": "#minecraft:planks", "minimo": "$quantidade", "descricao": "Tábuas pedidas no inventário."}
+}

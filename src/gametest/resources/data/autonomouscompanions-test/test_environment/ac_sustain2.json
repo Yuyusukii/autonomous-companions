@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:all_of",
+  "definitions": [
+    {"type": "minecraft:function", "setup": "autonomouscompanions-test:reset_memory"},
+    {"type": "minecraft:game_rules", "rules": {"minecraft:spawn_mobs": false, "minecraft:advance_time": false}},
+    {"type": "minecraft:clock_time", "clock": "minecraft:overworld", "time": 18000},
+    {"type": "minecraft:weather", "weather": "clear"},
+    {"type": "minecraft:difficulty", "difficulty": "normal"}
+  ]
+}

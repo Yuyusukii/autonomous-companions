@@ -1,0 +1,23 @@
+{
+  "nome": "Minerar diamante",
+  "objetivo": "Obter diamantes (no fundo do mundo, com picareta de ferro).",
+  "palavras_chave": ["minerar diamante", "diamante", "diamantes", "minério de diamante"],
+  "quantidade_padrao": 1,
+  "pre_requisitos": [
+    {"tipo": "ferramenta_para", "bloco": "minecraft:diamond_ore", "descricao": "Picareta de ferro (ou melhor); ela faz uma se tiver como conseguir ferro."},
+    {"tipo": "espaco_livre", "minimo": 3, "descricao": "Espaço no inventário para o que sair das galerias."},
+    {"tipo": "seguranca", "descricao": "Sem monstros por perto antes de descer."}
+  ],
+  "procedimento": [
+    {"acao": "avaliar", "descricao": "Avaliar equipamento e vida."},
+    {"acao": "obter", "item": "minecraft:diamond", "quantidade": "$quantidade", "descricao": "Descer em escada até a faixa de altura dos diamantes, abrir galerias e minerar."},
+    {"acao": "verificar", "item": "minecraft:diamond", "quantidade": "$quantidade", "descricao": "Conferir os diamantes."}
+  ],
+  "recuperacao": [
+    {"falha": "NAO_ENCONTRADO", "acao": "ampliar_busca", "descricao": "Nada nas galerias: abrir mais galerias, mais longe."},
+    {"falha": "SEM_ROTA", "acao": "tentar_de_novo", "descricao": "Galeria bloqueada (lava, água, rocha-matriz): seguir por outro lado."},
+    {"falha": "PERIGO", "acao": "aguardar_seguranca", "descricao": "Perigo: recuar ou combater e voltar depois."},
+    {"falha": "INVENTARIO_CHEIO", "acao": "liberar_espaco", "descricao": "Inventário cheio: descartar itens permitidos."}
+  ],
+  "sucesso": {"item": "minecraft:diamond", "minimo": "$quantidade", "descricao": "Diamantes no inventário."}
+}

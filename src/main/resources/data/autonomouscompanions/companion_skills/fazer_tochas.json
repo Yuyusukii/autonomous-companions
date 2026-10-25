@@ -1,0 +1,18 @@
+{
+  "nome": "Fazer tochas",
+  "objetivo": "Fabricar tochas para iluminar (carvão ou carvão vegetal mais graveto).",
+  "palavras_chave": ["fazer tochas", "tochas", "tocha", "iluminação", "iluminar"],
+  "quantidade_padrao": 8,
+  "pre_requisitos": [
+    {"tipo": "espaco_livre", "minimo": 1, "descricao": "Espaço livre no inventário."}
+  ],
+  "procedimento": [
+    {"acao": "fabricar", "item": "minecraft:torch", "quantidade": "$quantidade", "descricao": "Fabricar tochas (cada receita dá 4), conseguindo antes carvão e gravetos se faltarem."},
+    {"acao": "verificar", "item": "minecraft:torch", "quantidade": "$quantidade", "descricao": "Conferir as tochas."}
+  ],
+  "recuperacao": [
+    {"falha": "NAO_ENCONTRADO", "acao": "ampliar_busca", "descricao": "Sem carvão nem madeira por perto: procurar mais longe."},
+    {"falha": "INVENTARIO_CHEIO", "acao": "liberar_espaco", "descricao": "Inventário cheio: descartar itens permitidos."}
+  ],
+  "sucesso": {"item": "minecraft:torch", "minimo": "$quantidade", "descricao": "Tochas no inventário."}
+}

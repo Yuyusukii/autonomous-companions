@@ -1,0 +1,13 @@
+{
+  "nome": "Habilidade inválida (teste)",
+  "objetivo": "Usada só nos testes: ação desconhecida e item que não existe nesta versão.",
+  "palavras_chave": ["teste invalido"],
+  "procedimento": [
+    {"acao": "voar", "descricao": "Ação que o mod não sabe executar."},
+    {"acao": "obter", "item": "minecraft:item_que_nao_existe", "quantidade": "1", "descricao": "Item inexistente."}
+  ],
+  "recuperacao": [
+    {"falha": "CHUVA", "acao": "dançar", "descricao": "Motivo e recuperação desconhecidos."}
+  ],
+  "sucesso": {"item": "minecraft:item_que_nao_existe", "minimo": "1"}
+}

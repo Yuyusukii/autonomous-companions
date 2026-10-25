@@ -1,0 +1,11 @@
+{
+  "nome": "Fugir do perigo",
+  "objetivo": "Evitar a morte iminente: sair de lava e fogo, subir para respirar, sair da neve fofa, afastar-se de creepers e de grupos grandes.",
+  "palavras_chave": ["fugir", "perigo", "escapar", "lava", "afogamento", "neve fofa", "creeper"],
+  "reativa": true,
+  "pre_requisitos": [],
+  "procedimento": [
+    {"acao": "avaliar", "descricao": "Perceber o perigo (lava, fogo, falta de ar, neve fofa, creeper armando, muitos inimigos, vida baixa) e reagir na hora, antes de qualquer tarefa."}
+  ],
+  "recuperacao": []
+}

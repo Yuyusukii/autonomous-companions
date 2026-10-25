@@ -1,0 +1,20 @@
+{
+  "nome": "Fazer fornalha",
+  "objetivo": "Fabricar uma fornalha (8 pedregulhos na bancada).",
+  "palavras_chave": ["fazer fornalha", "fornalha", "forno"],
+  "quantidade_padrao": 1,
+  "pre_requisitos": [
+    {"tipo": "ferramenta_para", "bloco": "minecraft:stone", "descricao": "Picareta para tirar pedra (de madeira ou melhor)."}
+  ],
+  "procedimento": [
+    {"acao": "obter", "item": "minecraft:cobblestone", "quantidade": "8", "descricao": "Juntar 8 pedregulhos (cavando pedra debaixo da terra, se preciso)."},
+    {"acao": "fabricar", "item": "minecraft:furnace", "quantidade": "$quantidade", "descricao": "Fabricar a fornalha na bancada."},
+    {"acao": "verificar", "item": "minecraft:furnace", "quantidade": "$quantidade", "descricao": "Conferir a fornalha."}
+  ],
+  "recuperacao": [
+    {"falha": "NAO_ENCONTRADO", "acao": "ampliar_busca", "descricao": "Sem pedra por perto: procurar mais longe."},
+    {"falha": "SEM_ROTA", "acao": "tentar_de_novo", "descricao": "Caminho bloqueado: tentar outro lugar."},
+    {"falha": "INVENTARIO_CHEIO", "acao": "liberar_espaco", "descricao": "Inventário cheio: descartar itens permitidos."}
+  ],
+  "sucesso": {"item": "minecraft:furnace", "minimo": "$quantidade", "descricao": "Fornalha no inventário."}
+}

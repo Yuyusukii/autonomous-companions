@@ -1,0 +1,22 @@
+{
+  "nome": "Coletar madeira",
+  "objetivo": "Cortar troncos das árvores próximas (qualquer tipo de madeira).",
+  "palavras_chave": ["coletar madeira", "madeira", "cortar árvore", "cortar árvores", "troncos", "tronco"],
+  "quantidade_padrao": 8,
+  "pre_requisitos": [
+    {"tipo": "espaco_livre", "minimo": 1, "descricao": "Espaço livre no inventário."},
+    {"tipo": "seguranca", "descricao": "Sem monstros por perto."}
+  ],
+  "procedimento": [
+    {"acao": "avaliar", "descricao": "Avaliar inventário (um machado acelera, mas não é obrigatório)."},
+    {"acao": "obter", "item": "#minecraft:logs", "quantidade": "$quantidade", "descricao": "Ir até as árvores mais próximas, cortar a árvore inteira (de baixo para cima, subindo num pilar se preciso) e replantar quando possível."},
+    {"acao": "verificar", "item": "#minecraft:logs", "quantidade": "$quantidade", "descricao": "Conferir os troncos no inventário."}
+  ],
+  "recuperacao": [
+    {"falha": "NAO_ENCONTRADO", "acao": "ampliar_busca", "descricao": "Sem árvores por perto: procurar mais longe."},
+    {"falha": "SEM_ROTA", "acao": "tentar_de_novo", "descricao": "Árvore inacessível: escolher outra."},
+    {"falha": "INVENTARIO_CHEIO", "acao": "liberar_espaco", "descricao": "Inventário cheio: descartar itens permitidos."},
+    {"falha": "PERIGO", "acao": "aguardar_seguranca", "descricao": "Perigo: esperar a situação ficar segura."}
+  ],
+  "sucesso": {"item": "#minecraft:logs", "minimo": "$quantidade", "descricao": "Troncos pedidos no inventário."}
+}

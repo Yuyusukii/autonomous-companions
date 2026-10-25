@@ -1,0 +1,125 @@
+plugins {
+	id 'net.fabricmc.fabric-loom' version "${loom_version}"
+}
+
+version = project.mod_version
+group = project.maven_group
+
+base {
+	archivesName = project.archives_base_name
+}
+
+repositories {
+}
+
+// No Windows, o inicializador do Java não abre arquivos de argumentos com caminho acima de 260 caracteres (usados
+// pelas tarefas run*). Se o projeto estiver numa pasta muito profunda, mova a saída: -PpastaBuild=C:/caminho/curto
+if (project.hasProperty('pastaBuild')) {
+	layout.buildDirectory = file(project.property('pastaBuild'))
+}
+
+loom {
+	splitEnvironmentSourceSets()
+
+	mods {
+		"autonomouscompanions" {
+			sourceSet sourceSets.main
+			sourceSet sourceSets.client
+		}
+	}
+}
+
+// Testes de jogo reais (servidor GameTest e cliente) fornecidos pelo Fabric API.
+// Tarefas geradas: runGameTest (servidor, ligado ao "check") e runClientGameTest (cliente com janela).
+fabricApi {
+	configureTests {
+		createSourceSet = true
+		modId = "autonomouscompanions-test"
+		enableGameTests = true
+		enableClientGameTests = true
+		eula = true
+	}
+}
+
+// Filtra os testes de jogo pelo nome: ./gradlew runGameTest -PfiltroTeste=parte_do_nome
+if (project.hasProperty('filtroTeste')) {
+	loom.runs.configureEach {
+		vmArg "-Dfabric-api.gametest.filter=${project.property('filtroTeste')}"
+	}
+}
+
+// Janela de teste: sempre a mesma jogadora. O Loom sorteia "PlayerNNN" a cada abertura e, com outro nome, o jogo a trata
+// como outra pessoa (as companheiras de antes não a reconheciam).
+loom.runs.matching { it.name == 'client' }.configureEach {
+	programArgs '--username', 'Jogadora'
+}
+
+// Abre o cliente direto num mundo salvo: ./gradlew runClient -PmundoRapido=nome_da_pasta
+if (project.hasProperty('mundoRapido')) {
+	loom.runs.matching { it.name == 'client' }.configureEach {
+		programArgs '--quickPlaySingleplayer', project.property('mundoRapido').toString()
+	}
+}
+
+dependencies {
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+
+	// Testes unitários (JUnit 5) com as classes do Minecraft no classpath.
+	testImplementation "net.fabricmc:fabric-loader-junit:${project.loader_version}"
+}
+
+test {
+	useJUnitPlatform()
+	testLogging {
+		events "passed", "skipped", "failed"
+		exceptionFormat "full"
+	}
+}
+
+processResources {
+	def version = project.version
+	inputs.property "version", version
+
+	filesMatching("fabric.mod.json") {
+		expand "version": version
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.release = 25
+	it.options.encoding = "UTF-8"
+}
+
+java {
+	withSourcesJar()
+	sourceCompatibility = JavaVersion.VERSION_25
+	targetCompatibility = JavaVersion.VERSION_25
+}
+
+jar {
+	def projectName = project.name
+	inputs.property "projectName", projectName
+	from("LICENSE") {
+		rename { "${it}_$projectName" }
+	}
+}
+
+// Copia o JAR final para a pasta de distribuição.
+tasks.register('dist', Copy) {
+	group = 'build'
+	description = 'Gera o JAR do mod e copia para a pasta dist/'
+	dependsOn tasks.named('jar')
+	from(tasks.named('jar').flatMap { it.archiveFile })
+	into(layout.projectDirectory.dir('dist'))
+}
+
+// Cada execução dos testes de jogo começa num mundo de testes novo (só build/run/gameTest/world — nunca os mundos da
+// jogadora em run/saves). Antes o mesmo mundo acumulava obras de todas as execuções anteriores (422 projetos), o que
+// deixava os testes dependentes uns dos outros e distorcia as medições de desempenho.
+tasks.matching { it.name == 'runGameTest' }.configureEach {
+	doFirst {
+		delete file('build/run/gameTest/world')
+	}
+}

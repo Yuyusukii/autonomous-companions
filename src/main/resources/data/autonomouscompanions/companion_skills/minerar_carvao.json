@@ -1,0 +1,22 @@
+{
+  "nome": "Minerar carvão",
+  "objetivo": "Juntar carvão (combustível e tochas).",
+  "palavras_chave": ["minerar carvão", "carvão", "minério de carvão", "combustível"],
+  "quantidade_padrao": 8,
+  "pre_requisitos": [
+    {"tipo": "ferramenta_para", "bloco": "minecraft:coal_ore", "descricao": "Picareta (de madeira ou melhor)."},
+    {"tipo": "espaco_livre", "minimo": 1, "descricao": "Espaço livre no inventário."}
+  ],
+  "procedimento": [
+    {"acao": "avaliar", "descricao": "Avaliar inventário e equipamento."},
+    {"acao": "obter", "item": "minecraft:coal", "quantidade": "$quantidade", "descricao": "Procurar minério de carvão (exposto nas encostas e cavernas, ou enterrado) e minerar."},
+    {"acao": "verificar", "item": "minecraft:coal", "quantidade": "$quantidade", "descricao": "Conferir o carvão no inventário."}
+  ],
+  "recuperacao": [
+    {"falha": "NAO_ENCONTRADO", "acao": "ampliar_busca", "descricao": "Nada por perto: procurar mais longe."},
+    {"falha": "SEM_ROTA", "acao": "tentar_de_novo", "descricao": "Rota bloqueada: tentar outro minério."},
+    {"falha": "INVENTARIO_CHEIO", "acao": "liberar_espaco", "descricao": "Inventário cheio: descartar itens permitidos."},
+    {"falha": "PERIGO", "acao": "aguardar_seguranca", "descricao": "Perigo: esperar a situação ficar segura."}
+  ],
+  "sucesso": {"item": "minecraft:coal", "minimo": "$quantidade", "descricao": "Carvão pedido no inventário."}
+}
