@@ -229,5 +229,5 @@ O [manual completo](docs/MANUAL.md) traz todos os detalhes de comportamento, pri
 </p>
 
 <p align="center">
-<sub>Feito por <a href="https://github.com/Yuyusukii">Yukki</a> · licença MIT · não é um produto oficial do Minecraft e não é aprovado nem associado à Mojang ou à Microsoft.</sub>
+<sub>Feito por <a href="https://github.com/Yuyusukii">Yukki</a> · 2026 · licença MIT · não é um produto oficial do Minecraft e não é aprovado nem associado à Mojang ou à Microsoft.</sub>
 </p>
